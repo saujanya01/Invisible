@@ -7,12 +7,13 @@ for i in range(60):
     ret, background = cap.read()
     background = np.flip(background, axis = 1)
 
+cv2.imshow("Background",background)
 while True:
     _, frame = cap.read()
     frame = np.flip(frame, axis = 1)
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-    lower1 = np.array([105,50,50])
-    upper1 = np.array([140,255,255])
+    lower1 = np.array([90,50,50])
+    upper1 = np.array([150,255,255])
     mask = cv2.inRange(hsv,lower1,upper1)
     
     kernel = np.ones((5,5),np.uint8)
@@ -33,4 +34,5 @@ while True:
     if k == 27:
         break
     
+cv2.imshow("background",background)
 cv2.destroyAllWindows()
