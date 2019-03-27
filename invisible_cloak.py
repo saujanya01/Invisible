@@ -1,6 +1,9 @@
 import cv2
 import numpy as np
 
+def nothing(x):
+    return(x)
+
 cap = cv2.VideoCapture(0)
 
 for i in range(60):
@@ -12,8 +15,28 @@ while True:
     _, frame = cap.read()
     frame = np.flip(frame, axis = 1)
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-    lower1 = np.array([90,50,50])
-    upper1 = np.array([150,255,255])
+    cv2.imshow("hsv",hsv)
+    
+    cv2.namedWindow('HSV min')
+    cv2.createTrackbar('H minimum','HSV min',0,180,nothing)
+    cv2.createTrackbar('S minimum','HSV min',0,255,nothing)
+    cv2.createTrackbar('V minimum','HSV min',0,255,nothing)
+    
+    cv2.namedWindow('HSV max')
+    cv2.createTrackbar('H maximum','HSV max',0,180,nothing)
+    cv2.createTrackbar('S maximum','HSV max',0,255,nothing)
+    cv2.createTrackbar('V maximum','HSV max',0,255,nothing)
+
+    h_min = cv2.getTrackbarPos('H minimum','HSV min')
+    s_min = cv2.getTrackbarPos('S minimum','HSV min')
+    v_min = cv2.getTrackbarPos('V minimum','HSV min')
+    
+    h_max = cv2.getTrackbarPos('H maximum','HSV max')
+    s_max = cv2.getTrackbarPos('S maximum','HSV max')
+    v_max = cv2.getTrackbarPos('V maximum','HSV max')
+    
+    lower1 = np.array([h_min,s_min,v_min])
+    upper1 = np.array([h_max,s_max,v_max])
     mask = cv2.inRange(hsv,lower1,upper1)
     
     kernel = np.ones((5,5),np.uint8)
@@ -34,5 +57,6 @@ while True:
     if k == 27:
         break
     
+cap.release()
 cv2.imshow("background",background)
 cv2.destroyAllWindows()
