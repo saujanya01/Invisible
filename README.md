@@ -9,3 +9,5 @@ There are two frames for minimum and maximum value of the HSV values of a partic
 The slider can be used to change values of H, S and V for making different colors to disappear according to users choice.
 
 <img src="slider.png">
+
+These sliders can be used to adjust the HSV values.
