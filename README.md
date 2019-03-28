@@ -11,3 +11,4 @@ The slider can be used to change values of H, S and V for making different color
 <img src="slider.png">
 
 These sliders can be used to adjust the HSV values.
+The value of HSV min must always be less than or equal to HSV max(for obvious reasons).
